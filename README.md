@@ -171,4 +171,3 @@ Facultad de Ingeniería - Introducción a Ingeniería de Software 2026
 Universidad de San Buenaventura Cali
 Facultad de Ingeniería
 Introducción a Ingeniería de Software'
->>>>>>> 1e00e817bd9cb1a603649c346bad0275cab2ba0b
