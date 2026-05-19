@@ -1,12 +1,12 @@
-HealthCorp — Plataforma Digital para EPS e IPS
+# HealthCorp — Plataforma Digital para EPS e IPS
 
 Sistema orientado al sector salud colombiano que funciona como intermediario digital entre pacientes, EPS e IPS, permitiendo la gestión de citas médicas, historial clínico, autorizaciones, fórmulas médicas, telemedicina y emergencias.
 
-📌 Descripción del Proyecto
+# 📌 Descripción del Proyecto
 
 HealthCorp es una aplicación enfocada en mejorar la comunicación y gestión de servicios médicos dentro del ecosistema de salud colombiano. El sistema integra pacientes, médicos, administrativos y operadores farmacéuticos en una única plataforma digital.
 
-La solución busca optimizar procesos como:
+# La solución busca optimizar procesos como:
 
 Agendamiento de citas
 Consulta de historial clínico
@@ -15,8 +15,8 @@ Gestión de autorizaciones
 Telemedicina
 Notificaciones automáticas
 Atención de emergencias con geolocalización
-👥 Roles del Sistema
-Paciente
+# 👥 Roles del Sistema
+# Paciente
 Agendar, cancelar y reprogramar citas
 Consultar historial clínico
 Ver resultados médicos
@@ -30,7 +30,7 @@ Registrar diagnósticos
 Generar fórmulas médicas
 Emitir incapacidades
 Gestionar agenda médica
-Administrativo
+# Administrativo
 Aprobar solicitudes
 Gestionar trámites
 Validar afiliaciones
@@ -40,7 +40,7 @@ Operador Farmacéutico
 Consultar fórmulas médicas
 Preparar medicamentos
 Notificar disponibilidad
-🚑 Funcionalidades Principales
+# 🚑 Funcionalidades Principales
 Gestión de Citas
 Agenda médica en tiempo real
 Cancelación y reprogramación
@@ -62,7 +62,7 @@ Fórmulas Médicas Digitales
 Generación con firma digital
 Código QR o barras
 Alertas de vencimiento
-🛠️ Tecnologías y Arquitectura
+# 🛠️ Tecnologías y Arquitectura
 Infraestructura
 Servicios en la nube
 Arquitectura escalable
@@ -71,8 +71,7 @@ Backups automáticos
 Disponibilidad 99.9%
 Backend
 
-Encargado de:
-
+# Encargado de:
 Usuarios
 Autenticación
 Citas
@@ -80,8 +79,7 @@ Datos médicos
 Autorizaciones
 Base de Datos
 
-Almacenamiento de:
-
+# Almacenamiento de:
 Información de pacientes
 Historial clínico
 Fórmulas médicas
@@ -94,13 +92,9 @@ SSL/HTTPS
 Accesibilidad para adultos mayores
 Alta disponibilidad
 Integración con sistemas IPS
-Cumplimiento de la Ley 1581 de 2012
-📋 Metodología de Trabajo
-SCRUM
 
-El proyecto se desarrolla bajo metodología ágil SCRUM.
-
-Organización
+# El proyecto se desarrolla bajo metodología ágil SCRUM.
+Organización: 
 Sprint cada 2 semanas
 Reuniones semanales
 Roles definidos:
@@ -113,10 +107,9 @@ Matriz de priorización de Wiegers
 Retrospectiva Estrella de Mar
 Walkthroughs
 Prototipos
-📊 Priorización de Historias de Usuario
+# 📊 Priorización de Historias de Usuario
 
 La priorización se realizó usando:
-
 Prioridad = (Urgencia × Impacto) / Esfuerzo
 Historias de Usuario más importantes
 Agenda médica del doctor
@@ -126,30 +119,14 @@ Inicio de sesión
 Historial clínico
 Fórmulas médicas
 Gestión administrativa de medicamentos
-🎯 Patrón de Diseño
+# 🎯 Patrón de Diseño
 Observer Pattern
-
 Se implementa el patrón Observer para manejar eventos del sistema y notificaciones automáticas entre módulos.
 
-Beneficios
-Desacoplamiento entre componentes
-Escalabilidad
-Sincronización automática
-Mejor trazabilidad
-Integración sencilla de nuevos módulos
-Ejemplo
-
-Cuando una cita cambia de estado:
-
-Se notifica al paciente
-Se actualiza la agenda médica
-Se sincroniza el historial clínico
-Se generan alertas automáticas
-🧱 Aplicación de Principios SOLID
+# 🧱 Aplicación de Principios SOLID
 Single Responsibility Principle (SRP)
 
-El sistema se divide en módulos independientes:
-
+# El sistema se divide en módulos independientes:
 Paciente
 Gestión de citas
 Historial clínico
@@ -167,7 +144,7 @@ Seguridad
 Auditoría
 Disponibilidad
 Encriptación
-📈 Gestión de Riesgos
+# 📈 Gestión de Riesgos
 Riesgos identificados
 Falta de experiencia en sector salud
 Problemas de coordinación
@@ -178,34 +155,8 @@ Organización interna clara
 Investigación del sector salud
 Uso de almacenamiento en la nube
 Seguimiento normativo continuo
-💰 Presupuesto del Proyecto
-Costos estimados
-Recursos humanos
-Infraestructura cloud
-APIs externas
-Servicios de videollamadas
-SMS y notificaciones
-Presupuesto total estimado
-$201.776.250 COP
-🎨 Diseño UI/UX
 
-La interfaz está inspirada en la línea gráfica de SURA, priorizando:
-
-Confianza visual
-Accesibilidad
-Facilidad de uso
-Experiencia intuitiva
-
-Los mockups fueron desarrollados usando V0 by Vercel.
-
-📌 Objetivos del Proyecto
-Digitalizar procesos médicos
-Reducir tiempos de atención
-Mejorar comunicación EPS–IPS–Paciente
-Facilitar acceso a servicios médicos
-Garantizar seguridad y trazabilidad de datos
-Mejorar experiencia del usuario en salud digital
-👨‍💻 Equipo de Desarrollo
+# 👨‍💻 Equipo de Desarrollo
 Nicolas Loboa
 Sara Sierra
 Valeria Becerra
@@ -213,6 +164,10 @@ Juan José Bolivar
 Miley Carrera
 Hanna Valencia
 
+<<<<<<< HEAD
+# Universidad de San Buenaventura Cali
+Facultad de Ingeniería - Introducción a Ingeniería de Software 2026 
+=======
 Universidad de San Buenaventura Cali
 Facultad de Ingeniería
 Introducción a Ingeniería de Software'
