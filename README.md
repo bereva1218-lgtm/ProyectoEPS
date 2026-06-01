@@ -151,10 +151,5 @@ Juan José Bolivar
 Miley Carrera
 Hanna Valencia
 
-<<<<<<< HEAD
 # Universidad de San Buenaventura Cali
 Facultad de Ingeniería - Introducción a Ingeniería de Software 2026 
-=======
-Universidad de San Buenaventura Cali
-Facultad de Ingeniería
-Introducción a Ingeniería de Software'
