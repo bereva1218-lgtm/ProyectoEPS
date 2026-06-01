@@ -79,19 +79,6 @@ Datos médicos
 Autorizaciones
 Base de Datos
 
-# Almacenamiento de:
-Información de pacientes
-Historial clínico
-Fórmulas médicas
-Citas
-Autorizaciones
-🔐 Requisitos No Funcionales
-Encriptación de datos médicos
-Autenticación de dos factores
-SSL/HTTPS
-Accesibilidad para adultos mayores
-Alta disponibilidad
-Integración con sistemas IPS
 
 # El proyecto se desarrolla bajo metodología ágil SCRUM.
 Organización: 
