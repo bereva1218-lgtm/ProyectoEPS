@@ -1,0 +1,171 @@
+@startuml HealthCorp_Diagrama_Componentes
+
+!theme plain
+skinparam backgroundColor #FEFEFE
+skinparam componentBackgroundColor #E8F4F8
+skinparam componentBorderColor #333333
+skinparam arrowColor #333333
+
+package "Cliente" {
+  component [Aplicación Web] as WebApp
+  component [Aplicación Mobile] as MobileApp
+}
+
+package "Frontend Layer" {
+  component [Web UI (React/Angular)] as WebUI
+  component [Mobile UI (React Native/Flutter)] as MobileUI
+  component [Notificaciones UI] as NotificacionesUI
+}
+
+package "API Gateway & Load Balancer" {
+  component [API Gateway] as APIGateway
+  component [Load Balancer] as LoadBalancer
+}
+
+package "Backend Services (Microservicios)" {
+  component [Servicio de Autenticación] as AuthService
+  component [Servicio de Usuarios] as UserService
+  component [Servicio de Citas] as CitaService
+  component [Servicio Médico] as MedicoService
+  component [Servicio de Historial Clínico] as HistorialService
+  component [Servicio de Fórmulas] as FormulaService
+  component [Servicio de Autorizaciones] as AutorizacionService
+  component [Servicio de Emergencias] as EmergenciaService
+  component [Servicio de Telemedicina] as TelemedicinService
+}
+
+package "Servicios Transversales" {
+  component [Servicio de Notificaciones] as NotificationService
+  component [Servicio de Reportes] as ReportService
+  component [Servicio de Auditoría] as AuditService
+  component [Servicio de Autenticación 2FA] as TwoFAService
+}
+
+package "Integración Externa" {
+  component [Servicio de Videoconferencia] as VideoService
+  component [Servicio de Geolocalización] as GeoService
+  component [Servicio de SMS/Email] as CommunicationService
+  component [Proveedor de Farmacia] as PharmacyProvider
+}
+
+package "Base de Datos" {
+  component [BD Usuarios] as DBUsers
+  component [BD Citas] as DBCitas
+  component [BD Historial Clínico] as DBHistorial
+  component [BD Fórmulas] as DBFormulas
+  component [BD Autorizaciones] as DBAutorizaciones
+  component [BD Auditoría & Logs] as DBLogs
+}
+
+package "Caché & Sesiones" {
+  component [Redis Cache] as Cache
+  component [Session Manager] as SessionManager
+}
+
+package "Almacenamiento" {
+  component [Cloud Storage (AWS S3/Azure Blob)] as CloudStorage
+  component [Almacenamiento de PDFs] as PDFStorage
+  component [Almacenamiento de Imágenes] as ImageStorage
+}
+
+package "Seguridad" {
+  component [SSL/TLS] as SSL
+  component [Encriptación de Datos] as Encryption
+  component [Gestor de Tokens (JWT)] as JWTManager
+  component [CORS & Rate Limiting] as CORS
+}
+
+package "Monitoreo & Logging" {
+  component [Kibana/ELK Stack] as Logging
+  component [Prometheus/Grafana] as Monitoring
+  component [Alert Manager] as AlertManager
+}
+
+package "Infraestructura Cloud" {
+  component [Orquestación (Kubernetes)] as K8s
+  component [Auto-scaling] as AutoScale
+  component [Backup Automático] as Backup
+}
+
+' ============ CONEXIONES ============
+
+' Clientes a Frontend
+WebApp --> WebUI
+MobileApp --> MobileUI
+
+' Frontend a API Gateway
+WebUI --> APIGateway
+MobileUI --> APIGateway
+NotificacionesUI --> APIGateway
+
+' API Gateway a Load Balancer
+APIGateway --> LoadBalancer
+
+' Load Balancer a Microservicios
+LoadBalancer --> AuthService
+LoadBalancer --> UserService
+LoadBalancer --> CitaService
+LoadBalancer --> MedicoService
+LoadBalancer --> HistorialService
+LoadBalancer --> FormulaService
+LoadBalancer --> AutorizacionService
+LoadBalancer --> EmergenciaService
+LoadBalancer --> TelemedicinService
+
+' Microservicios intercomunicación
+CitaService --> MedicoService
+CitaService --> HistorialService
+CitaService --> NotificationService
+FormulaService --> PharmacyProvider
+FormulaService --> PDFStorage
+AutorizacionService --> AdminService
+EmergenciaService --> GeoService
+EmergenciaService --> CommunicationService
+TelemedicinService --> VideoService
+
+' Servicios Transversales
+AuthService --> TwoFAService
+UserService --> AuthService
+AuthService --> JWTManager
+NotificationService --> CommunicationService
+ReportService --> DBLogs
+AuditService --> DBLogs
+
+' BD
+UserService --> DBUsers
+CitaService --> DBCitas
+MedicoService --> DBCitas
+HistorialService --> DBHistorial
+FormulaService --> DBFormulas
+AutorizacionService --> DBAutorizaciones
+AuditService --> DBLogs
+
+' Caché
+CitaService --> Cache
+FormulaService --> Cache
+SessionManager --> Cache
+
+' Almacenamiento
+HistorialService --> CloudStorage
+FormulaService --> ImageStorage
+ReportService --> PDFStorage
+
+' Seguridad
+APIGateway --> SSL
+UserService --> Encryption
+AuthService --> JWTManager
+APIGateway --> CORS
+
+' Monitoreo
+UserService -.-> Logging
+CitaService -.-> Logging
+AuthService -.-> Monitoring
+AlertManager -.-> Monitoring
+
+' Infraestructura
+TelemedicinService -.-> K8s
+CitaService -.-> K8s
+K8s -.-> AutoScale
+K8s -.-> Backup
+
+@enduml

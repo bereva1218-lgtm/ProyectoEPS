@@ -1,0 +1,416 @@
+@startuml HealthCorp_Diagrama_Clases
+
+!theme plain
+skinparam backgroundColor #FEFEFE
+skinparam classBackgroundColor #F0F0F0
+skinparam classBorderColor #333333
+skinparam arrowColor #333333
+
+' ============ ENTIDADES PRINCIPALES ============
+
+abstract class Usuario {
+  - idUsuario: String
+  - nombre: String
+  - email: String
+  - telefono: String
+  - contraseña: String (hash)
+  - estado: Boolean
+  - fechaRegistro: DateTime
+  - ultimoAcceso: DateTime
+  --
+  + login(email, contraseña): Boolean
+  + logout(): void
+  + actualizarPerfil(datos): void
+  + cambiarContraseña(nueva): void
+}
+
+class Paciente {
+  - idPaciente: String
+  - numeroAfiliacion: String
+  - tipoDocumento: String
+  - numeroDocumento: String
+  - fechaNacimiento: Date
+  - genero: String
+  - direccion: String
+  - eps: String
+  - aseguradora: String
+  - contactoEmergencia: String
+  - alergias: String[]
+  - condicionesPrevias: String[]
+  --
+  + agendarCita(medico, fecha): Cita
+  + cancelarCita(idCita): void
+  + reprogramarCita(idCita, nuevaFecha): void
+  + consultarHistorial(): HistorialClínico[]
+  + solicitarAutorizacion(tipo): Autorización
+  + accederTelemedicina(idCita): Sesion
+  + activarEmergencia(ubicacion): SOS
+  + verRecetas(): FórmulaMédica[]
+}
+
+class Médico {
+  - idMédico: String
+  - numeroMatricula: String
+  - especialidad: String
+  - horarioAtencion: Horario[]
+  - clínicaAfiliada: String
+  - telefonoConsultorio: String
+  - calificacionPromedio: Double
+  - totalPacientes: Integer
+  --
+  + consultarHistorialPaciente(idPaciente): HistorialClínico
+  + registrarDiagnóstico(idCita, diagnóstico): Diagnóstico
+  + generarFórmula(medicamentos[], idCita): FórmulaMédica
+  + emitirIncapacidad(dias, motivo): Incapacidad
+  + gestionarAgenda(fecha): Cita[]
+  + consultarProximas(fecha): Cita[]
+}
+
+class Administrativo {
+  - idAdministrativo: String
+  - departamento: String
+  - permisos: String[]
+  - nivel: String (gerencial, operativo)
+  --
+  + aprobarSolicitud(idAutorizacion): void
+  + rechazarSolicitud(idAutorizacion, motivo): void
+  + gestionarTrámites(idTramite): void
+  + validarAfiliación(idPaciente): Boolean
+  + registrarClínicaIPS(datos): Entidad
+  + generarReporte(tipo, fechas): Reporte
+}
+
+class OperadorFarmacéutico {
+  - idOperador: String
+  - farmaciaAfiliada: String
+  - inventario: Medicamento[]
+  --
+  + consultarFórmula(codigoQR): FórmulaMédica
+  + verificarMedicinas(medicamentos[]): Boolean
+  + prepararMedicamento(idFórmula): void
+  + notificarDisponibilidad(idPaciente, medicinas[]): void
+  + registrarEntrega(idFórmula, fecha): void
+}
+
+' ============ ENTIDADES MÉDICAS ============
+
+class Cita {
+  - idCita: String
+  - paciente: Paciente
+  - médico: Médico
+  - fechaHora: DateTime
+  - motivo: String
+  - lugar: String (consultorio, telemedicina)
+  - estado: String (programada, completada, cancelada)
+  - duracionEstimada: Integer
+  - notas: String
+  --
+  + confirmar(): void
+  + cancelar(motivo): void
+  + reprogramar(nuevaFecha): void
+  + registrarAsistencia(): void
+  + obtenerDetalles(): CitaDTO
+}
+
+class HistorialClínico {
+  - idHistorial: String
+  - paciente: Paciente
+  - diagnósticos: Diagnóstico[]
+  - fórmulas: FórmulaMédica[]
+  - incapacidades: Incapacidad[]
+  - vacunas: Vacuna[]
+  - alergias: Alergia[]
+  - observaciones: String
+  - fechaÚltimaActualización: DateTime
+  --
+  + agregarDiagnóstico(diagnóstico): void
+  + agregarFórmula(fórmula): void
+  + agregarVacuna(vacuna): void
+  + descargarPDF(): File
+  + obtenerResumen(): String
+}
+
+class Diagnóstico {
+  - idDiagnóstico: String
+  - codigoCIE10: String
+  - descripción: String
+  - severidad: String (leve, moderada, severa)
+  - fecha: DateTime
+  - médico: Médico
+  --
+  + validarCódigo(): Boolean
+}
+
+class FórmulaMédica {
+  - idFórmula: String
+  - paciente: Paciente
+  - médico: Médico
+  - medicamentos: Medicamento[]
+  - cantidades: Integer[]
+  - instrucciones: String
+  - frecuencia: String
+  - vigencia: Date
+  - codigoQR: String
+  - codigoBarras: String
+  - estadoDispensado: Boolean
+  - firmaDigital: String
+  --
+  + generarQR(): String
+  + validarVigencia(): Boolean
+  + marcarComoDispensada(): void
+  + obtenerDetalles(): FórmulaDTO
+}
+
+class Medicamento {
+  - idMedicamento: String
+  - nombre: String
+  - principioActivo: String
+  - concentración: String
+  - presentación: String
+  - contraindicaciones: String[]
+  - efectosSecundarios: String[]
+  --
+  + validarDisponibilidad(): Boolean
+}
+
+class Autorización {
+  - idAutorización: String
+  - paciente: Paciente
+  - tipo: String (procedimiento, medicamento, internación)
+  - descripción: String
+  - estado: String (pendiente, aprobada, rechazada)
+  - fechaSolicitud: DateTime
+  - fechaRespuesta: DateTime
+  - administrativo: Administrativo
+  - motivo: String
+  --
+  + solicitar(): void
+  + aprobar(): void
+  + rechazar(motivo): void
+  + obtenerEstado(): String
+}
+
+class Incapacidad {
+  - idIncapacidad: String
+  - paciente: Paciente
+  - médico: Médico
+  - diasAutorizados: Integer
+  - fechaInicio: Date
+  - fechaFin: Date
+  - motivo: String
+  - documentoPDF: File
+  --
+  + generarDocumento(): File
+  + enviarAlPaciente(): void
+}
+
+class Vacuna {
+  - idVacuna: String
+  - nombre: String
+  - fecha: Date
+  - lote: String
+  - profesional: String
+  - centroVacunacion: String
+}
+
+class Alergia {
+  - idAlergia: String
+  - sustancia: String
+  - reacción: String
+  - severidad: String (leve, moderada, severa)
+  - fechaDetección: Date
+}
+
+' ============ TELEMEDICINA ============
+
+class Telemedicina {
+  - idSesion: String
+  - cita: Cita
+  - paciente: Paciente
+  - médico: Médico
+  - fechaInicio: DateTime
+  - fechaFin: DateTime
+  - estado: String (conectada, finalizada)
+  - enlaceVideoconferencia: String
+  --
+  + iniciarSesión(): void
+  + finalizarSesión(): void
+  + enviarMensaje(mensaje): void
+  + compartirArchivo(archivo): void
+  + registrarNotas(notas): void
+}
+
+class Chat {
+  - idChat: String
+  - participantes: Usuario[]
+  - mensajes: Mensaje[]
+  - fechaCreación: DateTime
+  --
+  + enviarMensaje(texto): void
+  + compartirImagen(imagen): void
+  + obtenerHistorial(): Mensaje[]
+}
+
+class Mensaje {
+  - idMensaje: String
+  - remitente: Usuario
+  - contenido: String
+  - tipo: String (texto, imagen, archivo)
+  - timestamp: DateTime
+  - leído: Boolean
+}
+
+' ============ EMERGENCIAS ============
+
+class SOS {
+  - idSOS: String
+  - paciente: Paciente
+  - ubicacion: Coordenada
+  - timestamp: DateTime
+  - estado: String (activo, atendido, cancelado)
+  - ambulancia: Ambulancia
+  - familiaresNotificados: Usuario[]
+  - historialMédicoAccedido: HistorialClínico
+  --
+  + activarEmergencia(ubicacion): void
+  + notificarAmbulancia(): void
+  + notificarFamiliares(): void
+  + deactivarEmergencia(): void
+}
+
+class Ambulancia {
+  - idAmbulancia: String
+  - número: String
+  - ubicacion: Coordenada
+  - estado: String (disponible, en camino, ocupada)
+  - paramédicos: String[]
+  - equipamiento: String[]
+}
+
+class Coordenada {
+  - latitud: Double
+  - longitud: Double
+  - precisión: Double
+}
+
+' ============ NOTIFICACIONES ============
+
+class Notificación {
+  - idNotificación: String
+  - usuario: Usuario
+  - tipo: String (cita, fórmula, autorización, recordatorio)
+  - asunto: String
+  - contenido: String
+  - canal: String (email, SMS, push)
+  - fechaEnvío: DateTime
+  - estado: String (enviada, entregada, leída)
+  - enlace: String
+  --
+  + enviar(): void
+  + marcarComoLeída(): void
+}
+
+' ============ REPORTES Y AUDITORÍA ============
+
+class Reporte {
+  - idReporte: String
+  - tipo: String (estadístico, auditoría, financiero)
+  - periodo: DateRange
+  - datos: Object[]
+  - generadoPor: Administrativo
+  - fechaGeneración: DateTime
+  - formato: String (PDF, Excel, CSV)
+  --
+  + generar(): File
+  + descargar(): File
+}
+
+class AuditoríaLog {
+  - idLog: String
+  - usuario: Usuario
+  - acción: String
+  - entidad: String
+  - idEntidad: String
+  - cambiosRealizados: String
+  - timestamp: DateTime
+  - ipAddress: String
+  - estado: String (exitoso, fallido)
+}
+
+' ============ ENTIDADES SECUNDARIAS ============
+
+class Horario {
+  - diaSemana: String
+  - horaInicio: Time
+  - horaFin: Time
+  - capacidadCitas: Integer
+}
+
+class Entidad {
+  - idEntidad: String
+  - nombre: String
+  - tipo: String (clínica, IPS, farmacia)
+  - direccion: String
+  - telefono: String
+  - email: String
+  - estado: Boolean
+}
+
+class CitaDTO {
+  - idCita: String
+  - nombrePaciente: String
+  - nombreMédico: String
+  - especialidad: String
+  - fechaHora: DateTime
+}
+
+class FórmulaDTO {
+  - idFórmula: String
+  - nombrePaciente: String
+  - medicamentos: String[]
+  - vigencia: Date
+}
+
+' ============ RELACIONES ============
+
+Usuario <|-- Paciente
+Usuario <|-- Médico
+Usuario <|-- Administrativo
+Usuario <|-- OperadorFarmacéutico
+
+Paciente "1" --> "0..*" Cita
+Médico "1" --> "0..*" Cita
+Cita "*" -- "1" HistorialClínico
+
+Paciente "1" --> "1" HistorialClínico
+HistorialClínico "1" --> "*" Diagnóstico
+HistorialClínico "1" --> "*" FórmulaMédica
+HistorialClínico "1" --> "*" Incapacidad
+HistorialClínico "1" --> "*" Vacuna
+HistorialClínico "1" --> "*" Alergia
+
+Médico "1" --> "*" Diagnóstico
+Médico "1" --> "*" FórmulaMédica
+Médico "1" --> "*" Incapacidad
+
+FórmulaMédica "*" --> "*" Medicamento
+OperadorFarmacéutico "1" --> "*" Medicamento
+
+Paciente "1" --> "*" Autorización
+Administrativo "1" --> "*" Autorización
+
+Cita "1" <-- "0..1" Telemedicina
+Telemedicina "*" --> "*" Usuario
+Chat "*" --> "*" Usuario
+Chat "1" --> "*" Mensaje
+
+Paciente "1" --> "0..*" SOS
+SOS "1" --> "0..1" Ambulancia
+SOS "1" --> "1" Coordenada
+
+Usuario "1" --> "*" Notificación
+
+Administrativo "1" --> "*" Reporte
+Usuario "1" --> "*" AuditoríaLog
+
+@enduml

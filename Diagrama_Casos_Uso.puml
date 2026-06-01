@@ -1,0 +1,379 @@
+@startuml HealthCorp_Casos_Uso
+
+!theme plain
+skinparam backgroundColor #FEFEFE
+skinparam actorBackgroundColor #E8F4F8
+skinparam usecaseBackgroundColor #FFF4E6
+skinparam usecaseBorderColor #333333
+skinparam arrowColor #333333
+
+' ============ ACTORES ============
+
+actor "Paciente" as Paciente
+actor "Médico" as Medico
+actor "Administrativo" as Admin
+actor "Operador\nFarmacéutico" as Farmacia
+actor "Sistema\nExterno" as Sistema
+
+' ============ SISTEMA PRINCIPAL ============
+
+rectangle "HEALTHCORP - Sistema EPS" {
+
+' ============ GESTIÓN DE CUENTA Y AUTENTICACIÓN ============
+
+package "Autenticación y Cuenta" {
+  usecase "UC-01: Registrarse en el Sistema" as UC01
+  usecase "UC-02: Iniciar Sesión" as UC02
+  usecase "UC-03: Cerrar Sesión" as UC03
+  usecase "UC-04: Recuperar Contraseña" as UC04
+  usecase "UC-05: Cambiar Contraseña" as UC05
+  usecase "UC-06: Activar Autenticación 2FA" as UC06
+  usecase "UC-07: Actualizar Perfil de Usuario" as UC07
+  usecase "UC-08: Gestionar Datos Personales" as UC08
+}
+
+' ============ GESTIÓN DE CITAS ============
+
+package "Gestión de Citas" {
+  usecase "UC-10: Agendar Cita" as UC10
+  usecase "UC-11: Ver Disponibilidad Médicos" as UC11
+  usecase "UC-12: Cancelar Cita" as UC12
+  usecase "UC-13: Reprogramar Cita" as UC13
+  usecase "UC-14: Confirmar Asistencia a Cita" as UC14
+  usecase "UC-15: Recibir Recordatorio de Cita" as UC15
+  usecase "UC-16: Ver Historial de Citas" as UC16
+  usecase "UC-17: Gestionar Horarios Disponibles (Médico)" as UC17
+}
+
+' ============ HISTORIAL CLÍNICO ============
+
+package "Historial Clínico y Diagnósticos" {
+  usecase "UC-20: Consultar Historial Clínico" as UC20
+  usecase "UC-21: Descargar Historial en PDF" as UC21
+  usecase "UC-22: Registrar Diagnóstico" as UC22
+  usecase "UC-23: Ver Diagnósticos Previos" as UC23
+  usecase "UC-24: Registrar Vacunas" as UC24
+  usecase "UC-25: Registrar Alergias y Condiciones" as UC25
+  usecase "UC-26: Acceder a Información Médica Crítica" as UC26
+}
+
+' ============ FÓRMULAS MÉDICAS ============
+
+package "Fórmulas Médicas Digitales" {
+  usecase "UC-30: Generar Fórmula Médica" as UC30
+  usecase "UC-31: Generar QR/Códigos de Barras" as UC31
+  usecase "UC-32: Firmar Digitalmente Fórmula" as UC32
+  usecase "UC-33: Consultar Fórmulas Vigentes" as UC33
+  usecase "UC-34: Descargar Fórmula en PDF" as UC34
+  usecase "UC-35: Validar Vigencia de Fórmula" as UC35
+  usecase "UC-36: Verificar Disponibilidad en Farmacia" as UC36
+  usecase "UC-37: Registrar Dispensación" as UC37
+  usecase "UC-38: Alertas de Vencimiento de Medicinas" as UC38
+}
+
+' ============ AUTORIZACIONES ============
+
+package "Gestión de Autorizaciones" {
+  usecase "UC-40: Solicitar Autorización" as UC40
+  usecase "UC-41: Ver Estado de Autorización" as UC41
+  usecase "UC-42: Aprobar Solicitud de Autorización" as UC42
+  usecase "UC-43: Rechazar Solicitud de Autorización" as UC43
+  usecase "UC-44: Validar Cobertura de Paciente" as UC44
+  usecase "UC-45: Verificar Vigencia de Póliza" as UC45
+  usecase "UC-46: Comunicar Decisión de Autorización" as UC46
+  usecase "UC-47: Generar Reporte de Autorizaciones" as UC47
+}
+
+' ============ INCAPACIDADES ============
+
+package "Gestión de Incapacidades" {
+  usecase "UC-50: Emitir Incapacidad" as UC50
+  usecase "UC-51: Descargar Documento de Incapacidad" as UC51
+  usecase "UC-52: Recibir Notificación de Incapacidad" as UC52
+  usecase "UC-53: Consultar Incapacidades Históricas" as UC53
+}
+
+' ============ TELEMEDICINA ============
+
+package "Telemedicina y Comunicación Remota" {
+  usecase "UC-60: Iniciar Consulta Telemedicina" as UC60
+  usecase "UC-61: Conectarse a Videollamada" as UC61
+  usecase "UC-62: Chat en Tiempo Real" as UC62
+  usecase "UC-63: Compartir Imágenes Médicas" as UC63
+  usecase "UC-64: Finalizar Sesión Telemedicina" as UC64
+  usecase "UC-65: Grabar Sesión (consentimiento)" as UC65
+  usecase "UC-66: Enviar Mensajes Asincronos" as UC66
+  usecase "UC-67: Compartir Documentos" as UC67
+}
+
+' ============ EMERGENCIAS ============
+
+package "Sistema de Emergencias" {
+  usecase "UC-70: Activar Botón de Emergencia (SOS)" as UC70
+  usecase "UC-71: Compartir Ubicación GPS" as UC71
+  usecase "UC-72: Notificar Ambulancia Cercana" as UC72
+  usecase "UC-73: Alertar a Familiares" as UC73
+  usecase "UC-74: Acceso Rápido a Historial Médico" as UC74
+  usecase "UC-75: Contactar Hospital/Centro Médico" as UC75
+  usecase "UC-76: Cancelar Emergencia" as UC76
+  usecase "UC-77: Rastrear Ambulancia en Tiempo Real" as UC77
+  usecase "UC-78: Registrar Llamada de Emergencia" as UC78
+}
+
+' ============ NOTIFICACIONES ============
+
+package "Sistema de Notificaciones" {
+  usecase "UC-80: Recibir Recordatorio de Cita" as UC80
+  usecase "UC-81: Recibir Notificación de Fórmula Lista" as UC81
+  usecase "UC-82: Recibir Confirmación de Autorización" as UC82
+  usecase "UC-83: Recibir Alerta de Emergencia" as UC83
+  usecase "UC-84: Recibir Reporte de Cambios" as UC84
+  usecase "UC-85: Configurar Preferencias de Notificaciones" as UC85
+  usecase "UC-86: Elegir Canal de Notificación (Email/SMS/Push)" as UC86
+}
+
+' ============ ADMINISTRACIÓN Y GESTIÓN ============
+
+package "Administración de Entidades" {
+  usecase "UC-90: Registrar Nueva Clínica/IPS" as UC90
+  usecase "UC-91: Registrar Farmacia" as UC91
+  usecase "UC-92: Validar Afiliación de Paciente" as UC92
+  usecase "UC-93: Gestionar Información de Médicos" as UC93
+  usecase "UC-94: Administrar Permisos y Roles" as UC94
+  usecase "UC-95: Gestionar Trámites Administrativos" as UC95
+}
+
+' ============ REPORTES Y ANÁLISIS ============
+
+package "Reportes y Análisis" {
+  usecase "UC-100: Generar Reporte de Citas" as UC100
+  usecase "UC-101: Generar Reporte de Utilización" as UC101
+  usecase "UC-102: Generar Reporte Financiero" as UC102
+  usecase "UC-103: Generar Reporte de Auditoría" as UC103
+  usecase "UC-104: Exportar Reportes (PDF/Excel/CSV)" as UC104
+  usecase "UC-105: Ver Estadísticas en Tiempo Real" as UC105
+  usecase "UC-106: Analizar Tendencias de Diagnósticos" as UC106
+  usecase "UC-107: Generar Reporte de Calidad de Servicio" as UC107
+}
+
+' ============ SEGURIDAD Y AUDITORÍA ============
+
+package "Seguridad y Auditoría" {
+  usecase "UC-110: Auditar Acceso a Datos Médicos" as UC110
+  usecase "UC-111: Registrar Cambios en Expedientes" as UC111
+  usecase "UC-112: Monitorear Intentos de Acceso No Autorizado" as UC112
+  usecase "UC-113: Generar Logs de Auditoría" as UC113
+  usecase "UC-114: Encriptar Datos Sensibles" as UC114
+  usecase "UC-115: Validar Autenticación de Dos Factores" as UC115
+}
+
+' ============ INTEGRACIONES Y SINCRONIZACIONES ============
+
+package "Integraciones Externas" {
+  usecase "UC-120: Integración con Proveedores de Video" as UC120
+  usecase "UC-121: Integración con Servicios de Geolocalización" as UC121
+  usecase "UC-122: Integración con Proveedores de SMS/Email" as UC122
+  usecase "UC-123: Integración con Farmacias Externas" as UC123
+  usecase "UC-124: Sincronización de Datos con IPS" as UC124
+  usecase "UC-125: Integración con Servicios de Pago" as UC125
+}
+
+}
+
+' ============ RELACIONES - PACIENTE ============
+
+Paciente --> UC01
+Paciente --> UC02
+Paciente --> UC03
+Paciente --> UC04
+Paciente --> UC05
+Paciente --> UC06
+Paciente --> UC07
+Paciente --> UC08
+Paciente --> UC10
+Paciente --> UC11
+Paciente --> UC12
+Paciente --> UC13
+Paciente --> UC14
+Paciente --> UC15
+Paciente --> UC16
+Paciente --> UC20
+Paciente --> UC21
+Paciente --> UC23
+Paciente --> UC25
+Paciente --> UC33
+Paciente --> UC34
+Paciente --> UC35
+Paciente --> UC40
+Paciente --> UC41
+Paciente --> UC52
+Paciente --> UC60
+Paciente --> UC61
+Paciente --> UC62
+Paciente --> UC63
+Paciente --> UC64
+Paciente --> UC66
+Paciente --> UC67
+Paciente --> UC70
+Paciente --> UC71
+Paciente --> UC73
+Paciente --> UC76
+Paciente --> UC77
+Paciente --> UC80
+Paciente --> UC81
+Paciente --> UC82
+Paciente --> UC83
+Paciente --> UC85
+Paciente --> UC86
+
+' ============ RELACIONES - MÉDICO ============
+
+Medico --> UC02
+Medico --> UC03
+Medico --> UC05
+Medico --> UC07
+Medico --> UC17
+Medico --> UC20
+Medico --> UC22
+Medico --> UC23
+Medico --> UC24
+Medico --> UC26
+Medico --> UC30
+Medico --> UC31
+Medico --> UC32
+Medico --> UC50
+Medico --> UC60
+Medico --> UC61
+Medico --> UC62
+Medico --> UC63
+Medico --> UC64
+Medico --> UC65
+Medico --> UC66
+Medico --> UC67
+Medico --> UC100
+Medico --> UC101
+Medico --> UC105
+
+' ============ RELACIONES - ADMINISTRATIVO ============
+
+Admin --> UC02
+Admin --> UC03
+Admin --> UC05
+Admin --> UC07
+Admin --> UC42
+Admin --> UC43
+Admin --> UC44
+Admin --> UC45
+Admin --> UC46
+Admin --> UC47
+Admin --> UC90
+Admin --> UC91
+Admin --> UC92
+Admin --> UC93
+Admin --> UC94
+Admin --> UC95
+Admin --> UC100
+Admin --> UC101
+Admin --> UC102
+Admin --> UC103
+Admin --> UC104
+Admin --> UC105
+Admin --> UC106
+Admin --> UC107
+Admin --> UC110
+Admin --> UC111
+Admin --> UC112
+Admin --> UC113
+
+' ============ RELACIONES - FARMACIA ============
+
+Farmacia --> UC02
+Farmacia --> UC03
+Farmacia --> UC05
+Farmacia --> UC07
+Farmacia --> UC33
+Farmacia --> UC34
+Farmacia --> UC35
+Farmacia --> UC36
+Farmacia --> UC37
+Farmacia --> UC38
+Farmacia --> UC80
+Farmacia --> UC81
+
+' ============ RELACIONES - SISTEMA EXTERNO ============
+
+Sistema --> UC15
+Sistema --> UC71
+Sistema --> UC72
+Sistema --> UC73
+Sistema --> UC75
+Sistema --> UC80
+Sistema --> UC81
+Sistema --> UC82
+Sistema --> UC83
+Sistema --> UC84
+Sistema --> UC120
+Sistema --> UC121
+Sistema --> UC122
+Sistema --> UC123
+Sistema --> UC124
+Sistema --> UC125
+
+' ============ INCLUSIONES Y EXTENSIONES ============
+
+UC10 ..|> UC11
+UC10 ..|> UC15
+UC10 ..|> UC44
+
+UC12 ..|> UC15
+
+UC13 ..|> UC15
+
+UC30 ..|> UC22
+UC30 ..|> UC31
+UC30 ..|> UC32
+
+UC33 ..|> UC35
+
+UC36 ..|> UC35
+
+UC37 ..|> UC15
+
+UC40 ..|> UC41
+UC40 ..|> UC44
+UC40 ..|> UC45
+
+UC42 ..|> UC46
+
+UC43 ..|> UC46
+
+UC60 ..|> UC26
+UC60 ..|> UC61
+
+UC61 ..|> UC62
+UC61 ..|> UC63
+
+UC70 ..|> UC71
+UC70 ..|> UC72
+UC70 ..|> UC73
+UC70 ..|> UC74
+UC70 ..|> UC75
+
+UC72 ..|> UC77
+
+UC77 ..|> UC121
+
+UC100 ..|> UC104
+
+UC101 ..|> UC104
+
+UC102 ..|> UC104
+
+UC103 ..|> UC104
+UC103 ..|> UC111
+
+UC113 ..|> UC110
+UC113 ..|> UC111
+UC113 ..|> UC112
+
+@enduml
