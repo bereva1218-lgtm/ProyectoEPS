@@ -1,8 +1,8 @@
-# 📊 DIAGRAMAS UML - PROYECTO HEALTHCORP EPS
+#  DIAGRAMAS UML - PROYECTO HEALTHCORP EPS
 
 ---
 
-## 📋 TABLA DE CONTENIDOS
+##  TABLA DE CONTENIDOS
 1. [Diagrama de Clases UML](#diagrama-de-clases-uml)
 2. [Diagrama de Componentes](#diagrama-de-componentes)
 3. [Explicación Detallada](#explicación-detallada)
@@ -10,12 +10,12 @@
 
 ---
 
-## 🎯 DIAGRAMA DE CLASES UML
+## DIAGRAMA DE CLASES UML
 
 ### Descripción General
 El diagrama de clases UML de HealthCorp contiene **23 clases principales** organizadas en las siguientes capas:
 
-#### 📦 **Capa de Usuarios (Herencia)**
+#### **Capa de Usuarios (Herencia)**
 ```
 Usuario (Clase Abstracta)
 ├── Paciente
@@ -32,7 +32,7 @@ Todas heredan de la clase abstracta `Usuario` que contiene:
 
 ### 📝 **Clases Principales por Módulo**
 
-#### 1️⃣ **MÓDULO DE USUARIOS**
+#### **MÓDULO DE USUARIOS**
 
 **Clase: Paciente**
 - Hereda de: Usuario
@@ -91,7 +91,7 @@ Todas heredan de la clase abstracta `Usuario` que contiene:
 
 ---
 
-#### 2️⃣ **MÓDULO DE CITAS**
+#### **MÓDULO DE CITAS**
 
 **Clase: Cita**
 - Relación: Vincula Paciente con Médico
@@ -116,7 +116,7 @@ Todas heredan de la clase abstracta `Usuario` que contiene:
 
 ---
 
-#### 3️⃣ **MÓDULO DE HISTORIAL CLÍNICO**
+####  **MÓDULO DE HISTORIAL CLÍNICO**
 
 **Clase: HistorialClínico**
 - Centro del sistema: Almacena todo el expediente médico
@@ -151,7 +151,7 @@ Todas heredan de la clase abstracta `Usuario` que contiene:
 
 ---
 
-#### 4️⃣ **MÓDULO DE FÓRMULAS MÉDICAS**
+####  **MÓDULO DE FÓRMULAS MÉDICAS**
 
 **Clase: FórmulaMédica**
 - Relación con: Médico, Paciente, Medicamento
@@ -179,7 +179,7 @@ Todas heredan de la clase abstracta `Usuario` que contiene:
 
 ---
 
-#### 5️⃣ **MÓDULO DE AUTORIZACIONES**
+#### **MÓDULO DE AUTORIZACIONES**
 
 **Clase: Autorización**
 - Relación con: Paciente, Administrativo
@@ -197,7 +197,7 @@ Todas heredan de la clase abstracta `Usuario` que contiene:
 
 ---
 
-#### 6️⃣ **MÓDULO DE INCAPACIDADES**
+#### **MÓDULO DE INCAPACIDADES**
 
 **Clase: Incapacidad**
 - Relación con: Paciente, Médico
@@ -212,7 +212,7 @@ Todas heredan de la clase abstracta `Usuario` que contiene:
 
 ---
 
-#### 7️⃣ **MÓDULO DE TELEMEDICINA**
+####  **MÓDULO DE TELEMEDICINA**
 
 **Clase: Telemedicina**
 - Relación con: Cita, Paciente, Médico
@@ -237,7 +237,7 @@ Todas heredan de la clase abstracta `Usuario` que contiene:
 
 ---
 
-#### 8️⃣ **MÓDULO DE EMERGENCIAS**
+####  **MÓDULO DE EMERGENCIAS**
 
 **Clase: SOS**
 - Botón de pánico del paciente
@@ -267,7 +267,7 @@ Todas heredan de la clase abstracta `Usuario` que contiene:
 
 ---
 
-#### 9️⃣ **MÓDULO DE NOTIFICACIONES**
+#### **MÓDULO DE NOTIFICACIONES**
 
 **Clase: Notificación**
 - Sistema de alertas multicanal
@@ -282,7 +282,7 @@ Todas heredan de la clase abstracta `Usuario` que contiene:
 
 ---
 
-#### 🔟 **MÓDULO DE REPORTES Y AUDITORÍA**
+#### **MÓDULO DE REPORTES Y AUDITORÍA**
 
 **Clase: Reporte**
 - Análisis y estadísticas del sistema
@@ -306,7 +306,7 @@ Todas heredan de la clase abstracta `Usuario` que contiene:
 
 ---
 
-### 🔗 **Relaciones Principales**
+###  **Relaciones Principales**
 
 | Relación | Tipo | Cardinalidad | Significado |
 |----------|------|--------------|------------|
@@ -319,7 +319,7 @@ Todas heredan de la clase abstracta `Usuario` que contiene:
 
 ---
 
-## 🏗️ DIAGRAMA DE COMPONENTES
+## DIAGRAMA DE COMPONENTES
 
 ### Descripción General
 El diagrama de componentes muestra la **arquitectura técnica** de HealthCorp en 10 capas:
@@ -350,7 +350,7 @@ El diagrama de componentes muestra la **arquitectura técnica** de HealthCorp en
 
 ---
 
-### 📱 **CAPA 1: CLIENTE**
+###  **CAPA 1: CLIENTE**
 
 **Componentes:**
 - `Aplicación Web`: Acceso desde navegador (React/Angular/Vue)
@@ -363,7 +363,7 @@ El diagrama de componentes muestra la **arquitectura técnica** de HealthCorp en
 
 ---
 
-### 🎨 **CAPA 2: FRONTEND (PRESENTACIÓN)**
+### **CAPA 2: FRONTEND (PRESENTACIÓN)**
 
 **Componentes:**
 - `Web UI`: Componentes React/Angular para escritorio
@@ -377,7 +377,7 @@ El diagrama de componentes muestra la **arquitectura técnica** de HealthCorp en
 
 ---
 
-### 🚪 **CAPA 3: API GATEWAY & LOAD BALANCER**
+###  **CAPA 3: API GATEWAY & LOAD BALANCER**
 
 **Componentes:**
 - `API Gateway` (Kong/AWS API Gateway/Azure API Management)
@@ -398,7 +398,7 @@ El diagrama de componentes muestra la **arquitectura técnica** de HealthCorp en
 
 ---
 
-### 🔧 **CAPA 4: MICROSERVICIOS BACKEND**
+###  **CAPA 4: MICROSERVICIOS BACKEND**
 
 **9 Microservicios Independientes:**
 
@@ -505,7 +505,7 @@ Responsabilidades:
 
 ---
 
-### 🔄 **CAPA 5: SERVICIOS TRANSVERSALES**
+### **CAPA 5: SERVICIOS TRANSVERSALES**
 
 Servicios compartidos por múltiples microservicios:
 
@@ -579,7 +579,7 @@ Responsabilidades:
 
 ---
 
-### 🌐 **CAPA 6: INTEGRACIONES EXTERNAS**
+### **CAPA 6: INTEGRACIONES EXTERNAS**
 
 #### 1. **Servicio de Videoconferencia** (VideoService)
 ```
@@ -641,7 +641,7 @@ Responsabilidades:
 
 ---
 
-### 🗄️ **CAPA 7: BASE DE DATOS**
+###  **CAPA 7: BASE DE DATOS**
 
 Arquitectura **políglotica** (múltiples bases de datos especializadas):
 
@@ -707,7 +707,7 @@ Documentos:
 
 ---
 
-### ⚡ **CAPA 8: CACHÉ & SESIONES**
+###  **CAPA 8: CACHÉ & SESIONES**
 
 #### **Redis Cache**
 ```
@@ -734,7 +734,7 @@ Responsabilidades:
 
 ---
 
-### ☁️ **CAPA 9: ALMACENAMIENTO EN NUBE**
+###  **CAPA 9: ALMACENAMIENTO EN NUBE**
 
 #### **Cloud Storage (AWS S3 / Azure Blob Storage)**
 ```
@@ -771,7 +771,7 @@ Imágenes médicas:
 
 ---
 
-### 🔐 **CAPA 10: SEGURIDAD, MONITOREO E INFRAESTRUCTURA**
+###  **CAPA 10: SEGURIDAD, MONITOREO E INFRAESTRUCTURA**
 
 #### **Seguridad**
 
@@ -878,7 +878,7 @@ Alertas:
 
 ---
 
-### 🔄 **FLUJO DE DATOS CRÍTICOS**
+### **FLUJO DE DATOS CRÍTICOS**
 
 #### **1. Agendar una Cita**
 ```
@@ -932,9 +932,9 @@ HistorialService ← acceso rápido a alergias/medicinas
 
 ---
 
-## 📚 **EXPLICACIÓN DETALLADA**
+## **EXPLICACIÓN DETALLADA**
 
-### 🎓 **Conceptos Clave del Diagrama de Clases**
+### **Conceptos Clave del Diagrama de Clases**
 
 **1. Herencia**
 ```
@@ -966,7 +966,7 @@ Implementación: tabla intermedia formula_medicamentos
 
 ---
 
-### 🛡️ **Seguridad por Diseño**
+###  **Seguridad por Diseño**
 
 **1. Acceso Controlado por Roles (RBAC)**
 ```
@@ -1005,7 +1005,7 @@ Permite:
 
 ---
 
-### 📈 **Escalabilidad del Sistema**
+###  **Escalabilidad del Sistema**
 
 **1. Microservicios Desacoplados**
 ```
@@ -1038,9 +1038,9 @@ Cada uno optimizado para su caso de uso
 
 ---
 
-## 💻 **CÓMO USAR LOS ARCHIVOS PLANTUML**
+## **CÓMO USAR LOS ARCHIVOS PLANTUML**
 
-### 🔧 **Opción 1: Usar PlantUML Online**
+### **Opción 1: Usar PlantUML Online**
 
 1. Ir a: **https://www.plantuml.com/plantuml/uml/**
 2. Copiar todo el contenido del archivo `.puml`
@@ -1063,7 +1063,7 @@ java -jar plantuml.jar Diagrama_Clases_UML.puml
 # Genera: Diagrama_Clases_UML.png
 ```
 
-### 🔧 **Opción 3: Integración VS Code**
+###  **Opción 3: Integración VS Code**
 
 1. Instalar extensión: **PlantUML** (jebbs.plantuml)
 2. Abrir archivo `.puml`
@@ -1072,7 +1072,7 @@ java -jar plantuml.jar Diagrama_Clases_UML.puml
 
 ---
 
-## 📊 **ESTADÍSTICAS DE LOS DIAGRAMAS**
+##  **ESTADÍSTICAS DE LOS DIAGRAMAS**
 
 ### **Diagrama de Clases:**
 - 23 clases principales
@@ -1093,25 +1093,4 @@ java -jar plantuml.jar Diagrama_Clases_UML.puml
 
 ---
 
-## 🎯 **PRÓXIMOS PASOS**
 
-1. **Implementación**: Usar estos diagramas como base para:
-   - Crear repositorios Git por servicio
-   - Definir OpenAPI/Swagger specs
-   - Crear modelos de datos
-
-2. **Documentación**: Generar guías de:
-   - APIs REST
-   - Flujos de autenticación
-   - Procedimientos de deployment
-
-3. **Testing**: Diseñar pruebas basadas en:
-   - Interacciones entre servicios
-   - Casos de uso críticos (emergencia, autorización)
-   - Seguridad y acceso controlado
-
----
-
-**Diagramas generados automáticamente con PlantUML**
-**Proyecto: HealthCorp EPS**
-**Fecha: Mayo 2026**
